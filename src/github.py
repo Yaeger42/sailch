@@ -45,8 +45,9 @@ def build_list_to_email(filtered_prs: Dict[str, Any]) -> List[Dict[str, Any]]:
             dict_entry["created_by"] = entry["user"]["login"]
             dict_entry["requested_reviewers"] = []
             if entry["requested_reviewers"]:
-                for user in entry["requested_reviewers"]:
-                    dict_entry["requested_reviewers"].append(user["login"])
+                dict_entry["requested_reviewer"] = [
+                    user["login"] for user in entry["requested_reviewers"]
+                ]
             to_send_list.append(dict_entry)
         return dict_entry
     return []
@@ -56,4 +57,3 @@ prs = get_pull_requests()
 filtered = filter_prs_by_date(prs)
 listed = build_list_to_email(filtered)
 print(listed)
-
