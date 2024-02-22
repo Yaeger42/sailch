@@ -1,6 +1,5 @@
-from typing import Dict, Any, List
+from typing import Dict, Any
 from datetime import datetime, timedelta
-import json
 import requests
 
 headers = {
@@ -30,24 +29,3 @@ def filter_prs_by_date(prs: Dict[str, Any]) -> Dict[str, Any]:
         ]
         return dates_last_week
     return {}
-
-
-def build_list_to_email(filtered_prs: Dict[str, Any]) -> List[Dict[str, Any]]:
-    if filtered_prs:
-        to_send_list: List[Dict[str, Any]] = []
-        for entry in filtered_prs:
-            dict_entry = {}
-            dict_entry["url"] = entry["html_url"]
-            dict_entry["state"] = entry["state"]
-            dict_entry["locked"] = entry["locked"]
-            dict_entry["created_at"] = entry["created_at"]
-            dict_entry["assignees"] = entry["assignees"]
-            dict_entry["created_by"] = entry["user"]["login"]
-            dict_entry["requested_reviewers"] = []
-            if entry["requested_reviewers"]:
-                dict_entry["requested_reviewer"] = [
-                    user["login"] for user in entry["requested_reviewers"]
-                ]
-            to_send_list.append(dict_entry)
-        return to_send_list
-    return []

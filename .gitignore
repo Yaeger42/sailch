@@ -2,3 +2,6 @@ __pycache__
 env
 response_filtered.json
 response.json
+package
+deployment-package.zip
+.pytest_cache
