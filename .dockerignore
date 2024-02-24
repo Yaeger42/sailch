@@ -1,0 +1,8 @@
+response_filtered.json
+response.json
+__pycache__
+env
+.pytest_cache
+terraform/
+*.zip
+src/package/

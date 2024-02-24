@@ -6,7 +6,7 @@ def main():
     prs = get_pull_requests()
     filtered_prs_by_date = filter_prs_by_date(prs)
     body_email = build_list_to_email(filtered_prs_by_date)
-    send_email("projectdcd@outlook.com", "projectdcd@gmail.con", body_email)
+    send_email("projectdcd@gmail.com", "projectdcd@gmail.com", body_email)
 
 
 def lambda_handler(event, context):

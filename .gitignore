@@ -3,5 +3,9 @@ env
 response_filtered.json
 response.json
 package
-deployment-package.zip
 .pytest_cache
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.zip

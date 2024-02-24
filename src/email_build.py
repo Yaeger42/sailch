@@ -41,25 +41,21 @@ def build_list_to_email(filtered_prs: Dict[str, Any]) -> str:
         to_send_list.append(dict_entry)
     body_email_str = "Here's the list of issues from today and 1 week ago \n"
     for issue in to_send_list:
-        (
-            body_email_str
-            + f"""
+        body_email_str += f"""
         URL: {issue["url"]} 
         Status: {issue["state"]}
         IsLocked: {str(issue["locked"])} 
         Creation date: {issue["created_at"]}
         """
-        )
         if issue["assignees"]:
             body_email_str += f"""\nAssignees: {' '.join(issue["assignees"])}"""
         if issue["requested_reviewers"]:
-            body_email_str += (
-                f"""\nRequested reviewers: {' '.join(issue["requested_reviewers"])}"""
-            )
+            body_email_str += f"""\n        Requested reviewers: {' '.join(issue["requested_reviewers"])}"""
+    LOGGER.info(f"Email sent: \n {body_email_str}")
     return body_email_str
 
 
-def send_email(sender_email: str, recipient_email: str, body: str):
+def send_email(sender_email: str, recipient_emails: List[str], body: str):
     ses_client = boto3.client("ses")
     message = {
         "Subject": {"Data": "Daily PRs Report"},
@@ -68,7 +64,7 @@ def send_email(sender_email: str, recipient_email: str, body: str):
     try:
         response = ses_client.send_email(
             Source=sender_email,
-            Destination={"ToAddresses": [recipient_email]},
+            Destination={"ToAddresses": [recipient_emails]},
             Message=message,
         )
     except ClientError as e:
