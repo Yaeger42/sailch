@@ -79,3 +79,4 @@ While this is ready for production, I'd add a couple of changes to it if was to 
 - The second lambda would send the data to a SQS queue and once processed it would send it into another Lambda
 - The third lambda would receive the message from SQS and send it through SNS as well as making a record in Dynamodb, where it would store the emails
 In this way the segregation of roles would be more precise but also it would also make sure that every email is processed and in case there's one missing, retry it.
+I'd also add an eventBridge in front of the first lambda, so it gets triggered in a desired schedule
