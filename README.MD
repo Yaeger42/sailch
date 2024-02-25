@@ -5,7 +5,8 @@
 - An AWS Account
 - A verified email in AWS SES
 - An AWS Account with a user that has access to the following:
- - Lambda Invocation and creation, Sending messages in SES and creating Roles in IAM as well as policies
+- Lambda Invocation and creation, Sending messages in SES and creating Roles in IAM as well as policies
+- Terraform
 ## How to run local tests:
 - To run the tests localy, build the docker image with:
 ```bash
