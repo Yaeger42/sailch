@@ -56,7 +56,7 @@ def build_list_to_email(filtered_prs: Dict[str, Any]) -> str:
 
 
 def send_email(sender_email: str, recipient_emails: List[str], body: str):
-    ses_client = boto3.client("ses")
+    ses_client = boto3.client("ses", region_name="us-east-1")
     message = {
         "Subject": {"Data": "Daily PRs Report"},
         "Body": {"Text": {"Data": body}},

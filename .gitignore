@@ -9,3 +9,4 @@ package
 terraform.tfstate
 terraform.tfstate.backup
 *.zip
+vars.env
